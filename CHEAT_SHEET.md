@@ -291,15 +291,5 @@ git branch -D      # Force delete branch
 
 ---
 
-## 📱 Tips for Beginners
 
-1. **Commit often** - Small, logical commits are better
-2. **Use meaningful messages** - "Fix bug" > "asdf"
-3. **Create branches** - Never work directly on main
-4. **Read before you execute** - Always check `git status` first
-5. **Use `-v` flag** - See what commands do
-6. **Google is your friend** - Most issues are common
 
----
-
-**Print this sheet & keep it handy! 📋**
