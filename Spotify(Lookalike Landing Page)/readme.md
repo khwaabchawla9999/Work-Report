@@ -37,10 +37,3 @@ This project was created to practice:
 
 https://khwaabchawla9999.github.io/Work-Report/Spotify(Lookalike%20Landing%20Page)/
 
-## Repository Structure
-
-```text
-Spotify(Lookalike Landing Page)/
-│
-├── index.html
-└── README.md
