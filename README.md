@@ -4,45 +4,99 @@ Welcome to my GitHub Pages portfolio repository.
 
 This repository contains multiple projects and hands-on practice work related to:
 
-- Linux & Git Basics
-- VPS Multi-Hosting
-- Frontend Landing Pages
-- GitHub Pages Deployment
-- HTML/CSS Projects
-- Networking & Server Concepts
+* Linux & Git Basics
+* VPS Multi-Hosting
+* Frontend Landing Pages
+* GitHub Pages Deployment
+* HTML/CSS Projects
+* Networking & Server Concepts
+* JavaScript & React Development
+
+---
 
 ## Projects Included
 
 ### 1. Linux + Git Basics
+
 Basic Linux commands, Git workflows, repository management, commits, pushes, and version control practice.
 
 ### 2. VPS Multi-Hosting
+
 A simple multi-site hosting structure demonstrating how multiple websites can be organized and served.
 
 ### 3. Spotify Lookalike Landing Page
+
 A responsive Spotify-inspired landing page built using HTML and CSS.
+
+### 4. JavaScript & React Basics
+
+A professional beginner-to-intermediate JavaScript and React study guide covering modern frontend development concepts.
+
+#### Topics Covered
+
+* JavaScript Fundamentals
+* TypeScript Basics
+* React Basics & Hooks
+* Routing & API Handling
+* Forms & Validation
+* Redux Toolkit
+* Authentication
+* Deployment
+* Advanced React Concepts
+
+#### Included Files
+
+* Interactive HTML Study Guide
+* Professional PDF Version
+
+📄 PDF Guide:
+[JavaScript & React Study Guide](./Javascript+React%20Basics/javascript-react-study-guide-professional.pdf)
+
+🌐 HTML Version:
+[Open HTML Guide](./Javascript+React%20Basics/index%28js%20and%20react%29.html)
+
+---
 
 ## GitHub Pages
 
 This repository is deployed using GitHub Pages.
 
-Live Website:
-https://khwaabchawla9999.github.io/Work-Report/
+🌍 Live Website:
+[Work-Report Portfolio](https://khwaabchawla9999.github.io/Work-Report/?utm_source=chatgpt.com)
+
+---
 
 ## Learning Goals
 
 This repository tracks my continuous learning journey in:
 
-- Git & GitHub
-- Linux Administration
-- Web Development
-- Hosting & Deployment
-- Frontend Design
-- Version Control Workflows
+* Git & GitHub
+* Linux Administration
+* Web Development
+* Hosting & Deployment
+* Frontend Design
+* JavaScript & React
+* Version Control Workflows
+
+---
 
 ## Regular Updates
 
 I regularly push updates, improvements, experiments, and new projects to this repository as part of my development practice and portfolio building.
 
 ---
-Created and maintained by Khwaab Chawla
+
+## Technologies Used
+
+* HTML5
+* CSS3
+* JavaScript
+* React
+* TypeScript
+* Git & GitHub
+* Linux
+* GitHub Pages
+
+---
+
+Created and maintained by **Khwaab Chawla**
