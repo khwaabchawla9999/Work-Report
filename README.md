@@ -38,7 +38,7 @@ A professional beginner-to-intermediate JavaScript and React study guide coverin
 This repository is deployed using GitHub Pages.
 
 🌍 Live Website:
-[Work-Report Portfolio](https://khwaabchawla9999.github.io/Work-Report/?utm_source=chatgpt.com)
+[Work-Report Portfolio](https://khwaabchawla9999.github.io/Work-Report/)
 
 ---
 
