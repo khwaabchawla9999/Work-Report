@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript & React Study Guide</title>
+    <style>
+      :root {
+        --ink: #0f172a;
+        --muted: #475569;
+        --soft: #64748b;
+        --line: #dbeafe;
+        --surface: #ffffff;
+        --surface-alt: #f8fafc;
+        --brand: #2563eb;
+        --brand-dark: #1d4ed8;
+        --accent: #eef4ff;
+        --success: #ecfdf5;
+        --warning: #fff7ed;
+        --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: var(--ink);
+        background: var(--surface-alt);
+        line-height: 1.6;
+      }
+
+      a {
+        color: var(--brand-dark);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      @page {
+        size: A4;
+        margin: 12mm;
+      }
+
+      .cover {
+        min-height: 100vh;
+        padding: 56px 52px;
+        background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 58%, #60a5fa 100%);
+        color: #fff;
+        page-break-after: always;
+      }
+
+      .cover-badge {
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+      }
+
+      .cover h1 {
+        font-size: 36px;
+        line-height: 1.15;
+        margin: 0 0 14px;
+      }
+
+      .cover p {
+        max-width: 760px;
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.92);
+        margin: 0 0 14px;
+      }
+
+      .cover-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .cover-card {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 18px;
+        padding: 18px 20px;
+        backdrop-filter: blur(2px);
+      }
+
+      .cover-card h3 {
+        margin: 0 0 10px;
+        font-size: 15px;
+      }
+
+      .cover-card ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .page {
+        padding: 18px 6px 32px;
+      }
+
+      .toc,
+      .module,
+      .appendix {
+        background: var(--surface);
+        border: 1px solid #e2e8f0;
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+        padding: 28px 28px 24px;
+        margin-bottom: 20px;
+      }
+
+      .toc {
+        page-break-after: always;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--brand-dark);
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+
+      h2 {
+        font-size: 26px;
+        line-height: 1.2;
+        margin: 0 0 8px;
+      }
+
+      h3 {
+        font-size: 17px;
+        margin: 0 0 10px;
+      }
+
+      .lede {
+        margin: 0 0 16px;
+        color: var(--muted);
+      }
+
+      .section-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 6px;
+      }
+
+      .back-link {
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 18px;
+        align-items: start;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 18px;
+      }
+
+      .pill {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: var(--brand-dark);
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .callout {
+        border-left: 4px solid var(--brand);
+        background: var(--accent);
+        border-radius: 14px;
+        padding: 14px 16px;
+        margin-top: 14px;
+      }
+
+      .callout.warning {
+        border-left-color: #f97316;
+        background: var(--warning);
+      }
+
+      .callout.success {
+        border-left-color: #059669;
+        background: var(--success);
+      }
+
+      .code-block {
+        margin-top: 16px;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid #cbd5e1;
+        background: #0f172a;
+        color: #e2e8f0;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .code-label {
+        padding: 10px 14px;
+        background: #1e293b;
+        color: #bfdbfe;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      pre {
+        margin: 0;
+        padding: 16px;
+        overflow-wrap: anywhere;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-size: 13px;
+        line-height: 1.55;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      }
+
+      .marker-list,
+      .check-list,
+      .toc-list,
+      .mini-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .marker-list li,
+      .check-list li,
+      .toc-list li,
+      .mini-list li {
+        position: relative;
+        padding-left: 24px;
+        margin-bottom: 10px;
+        color: var(--ink);
+      }
+
+      .marker-list li::before,
+      .toc-list li::before,
+      .mini-list li::before {
+        content: "•";
+        position: absolute;
+        left: 6px;
+        top: 0;
+        color: var(--brand);
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 1;
+      }
+
+      .check-list li::before {
+        content: "☐";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--brand-dark);
+        font-size: 16px;
+        line-height: 1.2;
+      }
+
+      .toc-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+        margin-top: 16px;
+      }
+
+      .toc-list a {
+        display: inline-block;
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .footer-note {
+        margin-top: 18px;
+        font-size: 13px;
+        color: var(--soft);
+      }
+
+      .module {
+        page-break-inside: avoid;
+      }
+
+      .module.major,
+      .appendix.major {
+        page-break-before: always;
+      }
+
+      .summary-strip {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 16px;
+      }
+
+      .summary-box {
+        border-radius: 16px;
+        padding: 14px 16px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+      }
+
+      .summary-box strong {
+        display: block;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--soft);
+        margin-bottom: 6px;
+      }
+
+      .appendix h2 {
+        margin-bottom: 10px;
+      }
+
+      .roadmap-grid,
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .week-card,
+      .project-card {
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        padding: 18px;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .project-card h3,
+      .week-card h3 {
+        margin-bottom: 8px;
+      }
+
+      .small {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        .page {
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="cover" id="top">
+      <div class="cover-badge">Professional Learning Edition</div>
+      <h1>JavaScript &amp; React Study Guide</h1>
+      <p>Beginner roadmap rebuilt into a cleaner, more professional PDF with clear bullet markers, clickable navigation, and example code for every core learning module.</p>
+      <p>Use it as a study checklist, a revision guide, and a project-planning reference while you build your first React apps.</p>
+
+      <div class="cover-grid">
+        <div class="cover-card">
+          <h3>What is improved</h3>
+          <ul>
+            <li>Stronger visual hierarchy and spacing</li>
+            <li>Clickable table of contents and back links</li>
+            <li>Example code in every main topic</li>
+            <li>Visible checklist-style bullet markers</li>
+          </ul>
+        </div>
+        <div class="cover-card">
+          <h3>How to use this guide</h3>
+          <ul>
+            <li>Read modules in order the first time</li>
+            <li>Build one tiny example after each module</li>
+            <li>Check off the practice tasks as you go</li>
+            <li>Return to the appendices for roadmap planning</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <main class="page">
+      <section class="toc" id="toc">
+        <div class="eyebrow">Contents</div>
+        <h2>Clickable Table of Contents</h2>
+        <p class="lede">Tip: every section title below links to its module, and every module has a back-to-contents link for faster revision.</p>
+        <div class="toc-grid">
+          <ol class="toc-list">
+            <li><a href="#module-1">JavaScript Fundamentals</a></li>
+            <li><a href="#module-2">TypeScript Basics</a></li>
+            <li><a href="#module-3">React Basics</a></li>
+            <li><a href="#module-4">Debugging</a></li>
+            <li><a href="#module-5">Styling Components</a></li>
+            <li><a href="#module-6">Component Deep Dive</a></li>
+            <li><a href="#module-7">HTTP Requests &amp; API Handling</a></li>
+          </ol>
+          <ol class="toc-list" start="8">
+            <li><a href="#module-8">Routing</a></li>
+            <li><a href="#module-9">Forms &amp; Validation</a></li>
+            <li><a href="#module-10">Redux</a></li>
+            <li><a href="#module-11">Authentication</a></li>
+            <li><a href="#module-12">Testing Introduction</a></li>
+            <li><a href="#module-13">Deployment</a></li>
+            <li><a href="#module-14">Advanced Topics</a></li>
+          </ol>
+        </div>
+        <div class="summary-strip">
+          <div class="summary-box">
+            <strong>Focus first</strong>
+            JavaScript, React basics, hooks, forms, API calls, routing.
+          </div>
+          <div class="summary-box">
+            <strong>Build while learning</strong>
+            Counter app, todo app, weather app, blog app, auth dashboard.
+          </div>
+          <div class="summary-box">
+            <strong>Use appendices for</strong>
+            Weekly roadmap, project ideas, common mistakes, final advice.
+          </div>
+        </div>
+      </section>
+
+      <section class="module major" id="module-1">
+        <div class="section-top">
+          <div>
+            <div class="eyebrow">Module 1</div>
+            <h2>JavaScript Fundamentals</h2>
+          </div>
+          <a class="back-link" href="#toc">Back to contents</a>
+        </div>
+        <p class="lede">React becomes much easier once variables, functions, arrays, objects, and references feel natural.</p>
+        <div class="two-col">
+          <div class="card">
+            <span class="pill">Core ideas</span>
+            <ul class="marker-list">
+              <li>Prefer <strong>const</strong> by default and use <strong>let</strong> only when reassignment is required.</li>
+              <li>Use arrow functions for callbacks and compact reusable logic.</li>
+              <li>Learn <strong>destructuring</strong>, <strong>spread</strong>, and <strong>rest</strong> because they appear everywhere in React state updates.</li>
+              <li>Practice <strong>map</strong>, <strong>filter</strong>, and <strong>reduce</strong> so rendering lists feels easy.</li>
+              <li>Understand that arrays and objects are copied by reference unless you create a new copy.</li>
+            </ul>
+            <div class="callout warning"><strong>Common mistake:</strong> mutating an object directly and expecting React to notice a change.</div>
+          </div>
+          <div class="card">
+            <span class="pill">Practice checklist</span>
+            <ul class="check-list">
+              <li>Rewrite a normal function as an arrow function.</li>
+              <li>Use destructuring in a function parameter.</li>
+              <li>Copy an array with spread before adding an item.</li>
+              <li>Transform an array with <strong>map</strong>.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Example code</div>
+          <pre><code>const users = [
+    { id: 1, name: 'Khwaab', score: 82 },
+    { id: 2, name: 'Sam', score: 95 }
+  ];
+
+  const addBonus = (list, bonus) =>
+    list.map(({ score, ...user }) => ({
+      ...user,
+      score: score + bonus
+    }));
+
+  const updatedUsers = addBonus(users, 5);
+  // [{ id: 1, name: 'Khwaab', score: 87 }, ...]</code></pre>
+        </div>
+      </section>
+
+      <section class="module" id="module-2">
+        <div class="section-top">
+          <div>
+            <div class="eyebrow">Module 2</div>
+            <h2>TypeScript Basics</h2>
+          </div>
+          <a class="back-link" href="#toc">Back to contents</a>
+        </div>
+        <p class="lede">TypeScript helps you catch mistakes earlier and makes large React apps easier to refactor safely.</p>
+        <div class="grid-2">
+          <div class="card">
+            <span class="pill">What to learn</span>
+            <ul class="marker-list">
+              <li>Primitive types, arrays, objects, and function return types.</li>
+              <li><strong>type</strong> and <strong>interface</strong> for describing data shapes.</li>
+              <li>Union types for values that can be one of several options.</li>
+              <li>Typed component props for safer React components.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Watch out for</span>
+            <ul class="check-list">
+              <li>Do not use <strong>any</strong> everywhere.</li>
+              <li>Type function parameters and return values.</li>
+              <li>Keep prop names and types consistent.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Example code</div>
+          <pre><code>type User = {
+    id: number;
+    name: string;
+    role: 'admin' | 'member';
+  };
+
+  type UserBadgeProps = {
+    user: User;
+  };
+
+  function UserBadge({ user }: UserBadgeProps) {
+    return &lt;span&gt;{user.name} ({user.role})&lt;/span&gt;;
+  }</code></pre>
+        </div>
+      </section>
+
+      <section class="module" id="module-3">
+        <div class="section-top">
+          <div>
+            <div class="eyebrow">Module 3</div>
+            <h2>React Basics</h2>
+          </div>
+          <a class="back-link" href="#toc">Back to contents</a>
+        </div>
+        <p class="lede">This is where JavaScript turns into UI: components, JSX, props, state, events, and small reusable pieces.</p>
+        <div class="two-col">
+          <div class="card">
+            <span class="pill">Essential ideas</span>
+            <ul class="marker-list">
+              <li>Modern projects are commonly created with Vite.</li>
+              <li>Components return JSX, which looks like HTML inside JavaScript.</li>
+              <li><strong>Props</strong> pass data in; <strong>state</strong> stores changing data.</li>
+              <li>Event handlers such as <strong>onClick</strong> and <strong>onChange</strong> keep the UI interactive.</li>
+              <li>Controlled inputs make forms predictable.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Build this first</span>
+            <ul class="check-list">
+              <li>A greeting component with props.</li>
+              <li>A counter with state and a button click.</li>
+              <li>A text input that updates live on screen.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Example code</div>
+          <pre><code>import { useState } from 'react';
+
+  function WelcomeCard({ name }) {
+    const [likes, setLikes] = useState(0);
+
+    return (
+      &lt;section className="card"&gt;
+        &lt;h2&gt;Hello, {name}&lt;/h2&gt;
+        &lt;p&gt;Likes: {likes}&lt;/p&gt;
+        &lt;button onClick={() =&gt; setLikes(likes + 1)}&gt;Like&lt;/button&gt;
+      &lt;/section&gt;
+    );
+  }</code></pre>
+        </div>
+      </section>
+
+      <section class="module" id="module-4">
+        <div class="section-top">
+          <div>
+            <div class="eyebrow">Module 4</div>
+            <h2>Debugging</h2>
+          </div>
+          <a class="back-link" href="#toc">Back to contents</a>
+        </div>
+        <p class="lede">Debugging is a skill, not a last resort. The goal is to find the smallest place where expected behavior diverges from actual behavior.</p>
+        <div class="grid-2">
+          <div class="card">
+            <span class="pill">Debugging workflow</span>
+            <ul class="marker-list">
+              <li>Read the full error message, especially the file name and line number.</li>
+              <li>Reproduce the issue with the smallest possible input.</li>
+              <li>Use <strong>console.log</strong>, browser DevTools, and React Developer Tools.</li>
+              <li>Check props, state, and network responses before guessing.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Useful checks</span>
+            <ul class="check-list">
+              <li>Is a value undefined before it loads?</li>
+              <li>Did you mutate state instead of replacing it?</li>
+              <li>Is a component rendering more often than expected?</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Example code</div>
+          <pre><code>function Profile({ user }) {
+    console.log('Profile received:', user);
+
+    if (!user) {
+      return &lt;p&gt;Loading user...&lt;/p&gt;;
+    }
+
+    return &lt;h2&gt;{user.name}&lt;/h2&gt;;
+  }</code></pre>
+        </div>
+        <div class="callout success"><strong>Tip:</strong> guarding against missing data first often removes “Cannot read properties of undefined” errors.</div>
+      </section>
+
+      <section class="module" id="module-5">
+        <div class="section-top">
+          <div>
+            <div class="eyebrow">Module 5</div>
+            <h2>Styling Components</h2>
+          </div>
+          <a class="back-link" href="#toc">Back to contents</a>
+        </div>
+        <p class="lede">Start with a simple styling approach, then choose utility classes or component-scoped styles when the project grows.</p>
+        <div class="grid-2">
+          <div class="card">
+            <span class="pill">Common options</span>
+            <ul class="marker-list">
+              <li>Plain CSS for small projects and quick experiments.</li>
+              <li>CSS Modules for local component styles.</li>
+              <li>Tailwind CSS for utility-first styling.</li>
+              <li>styled-components for CSS-in-JS projects.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Remember</span>
+            <ul class="check-list">
+              <li>Use conditional classes for active or disabled states.</li>
+              <li>Keep style naming consistent.</li>
+              <li>Do not overcomplicate styling for beginner apps.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Example code</div>
+          <pre><code>function StatusBadge({ isActive }) {
+    const className = isActive
+      ? 'badge badge--active'
+      : 'badge badge--inactive';
+
+    return &lt;span className={className}&gt;
+      {isActive ? 'Active' : 'Inactive'}
+    &lt;/span&gt;;
+  }</code></pre>
+        </div>
+      </section>
+
+      <section class="module" id="module-6">
+        <div class="section-top">
+          <div>
+            <div class="eyebrow">Module 6</div>
+            <h2>Component Deep Dive</h2>
+          </div>
+          <a class="back-link" href="#toc">Back to contents</a>
+        </div>
+        <p class="lede">As apps grow, good component structure matters just as much as writing JSX that works.</p>
+        <div class="two-col">
+          <div class="card">
+            <span class="pill">What to understand</span>
+            <ul class="marker-list">
+              <li>Split large screens into smaller focused components.</li>
+              <li>Prefer functional components and hooks in modern React.</li>
+              <li>Use <strong>Fragment</strong> when you need multiple sibling elements without an extra wrapper.</li>
+              <li>Use <strong>refs</strong> for DOM access and focus management.</li>
+              <li>Use <strong>React.memo</strong> only when repeated re-renders are actually a problem.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Component habits</span>
+            <ul class="check-list">
+              <li>Keep components small and purpose-specific.</li>
+              <li>Move repeated logic into custom hooks.</li>
+              <li>Name components after what they render.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Example code</div>
+          <pre><code>import { useEffect, useRef } from 'react';
+
+  function SearchInput() {
+    const inputRef = useRef(null);
+
+    useEffect(() =&gt; {
+      inputRef.current?.focus();
+    }, []);
+
+    return (
+      &lt;&gt;
+        &lt;label htmlFor="search"&gt;Search&lt;/label&gt;
+        &lt;input id="search" ref={inputRef} /&gt;
+      &lt;/&gt;
+    );
+  }</code></pre>
+        </div>
+      </section>
+
+      <section class="module" id="module-7">
+        <div class="section-top">
+          <div>
+            <div class="eyebrow">Module 7</div>
+            <h2>HTTP Requests &amp; API Handling</h2>
+          </div>
+          <a class="back-link" href="#toc">Back to contents</a>
+        </div>
+        <p class="lede">Fetching data is one of the first places where real apps feel different from toy examples.</p>
+        <div class="grid-2">
+          <div class="card">
+            <span class="pill">Key ideas</span>
+            <ul class="marker-list">
+              <li>Use <strong>GET</strong> to fetch, <strong>POST</strong> to create, <strong>PATCH/PUT</strong> to update, and <strong>DELETE</strong> to remove.</li>
+              <li>Store loading, data, and error state explicitly.</li>
+              <li>Transform API data before rendering if the UI needs a different shape.</li>
+              <li>Avoid infinite loops in <strong>useEffect</strong> dependencies.</li>
+              <li>An axios instance can centralize a base URL and shared headers.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Checklist</span>
+            <ul class="check-list">
+              <li>Show a loading state.</li>
+              <li>Show an error state.</li>
+              <li>Use keys when rendering API lists.</li>
+              <li>Keep fetch logic predictable.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Example code</div>
+          <pre><code>import { useEffect, useState } from 'react';
+
+  function PostsList() {
+    const [posts, setPosts] = useState([]);
+    const [status, setStatus] = useState('idle');
+
+    useEffect(() =&gt; {
+      setStatus('loading');
+
+      fetch('/api/posts')
+        .then((res) =&gt; res.json())
+        .then((data) =&gt; {
+          setPosts(data);
+          setStatus('success');
+        })
+        .catch(() =&gt; setStatus('error'));
+    }, []);
+
+    if (status === 'loading') return &lt;p&gt;Loading...&lt;/p&gt;;
+    if (status === 'error') return &lt;p&gt;Could not load posts.&lt;/p&gt;;
+
+    return &lt;ul&gt;{posts.map((post) =&gt; &lt;li key={post.id}&gt;{post.title}&lt;/li&gt;)}&lt;/ul&gt;;
+  }</code></pre>
+        </div>
+      </section>
+
+      <section class="module major" id="module-8">
+        <div class="section-top">
+          <div>
+            <div class="eyebrow">Module 8</div>
+            <h2>Routing</h2>
+          </div>
+          <a class="back-link" href="#toc">Back to contents</a>
+        </div>
+        <p class="lede">Routing chooses which component to show for a URL, making your app feel like a multi-page experience without full page reloads.</p>
+        <div class="two-col">
+          <div class="card">
+            <span class="pill">Topics to cover</span>
+            <ul class="marker-list">
+              <li><strong>react-router-dom</strong> for route definitions and navigation.</li>
+              <li><strong>Link</strong> for internal navigation instead of a normal anchor tag.</li>
+              <li>Route parameters such as <strong>/products/:id</strong>.</li>
+              <li>Protected routes, 404 routes, and lazy-loaded pages.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Mini goals</span>
+            <ul class="check-list">
+              <li>Create Home, About, and Product pages.</li>
+              <li>Read a route parameter with <strong>useParams</strong>.</li>
+              <li>Redirect unauthenticated users.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Example code</div>
+          <pre><code>import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom';
+
+  function ProtectedRoute({ isLoggedIn, children }) {
+    return isLoggedIn ? children : &lt;Navigate to="/login" replace /&gt;;
+  }
+
+  function App() {
+    return (
+      &lt;BrowserRouter&gt;
+        &lt;nav&gt;
+          &lt;Link to="/"&gt;Home&lt;/Link&gt;
+          &lt;Link to="/dashboard"&gt;Dashboard&lt;/Link&gt;
+        &lt;/nav&gt;
+
+        &lt;Routes&gt;
+          &lt;Route path="/" element={&lt;h1&gt;Home&lt;/h1&gt;} /&gt;
+          &lt;Route
+            path="/dashboard"
+            element={
+              &lt;ProtectedRoute isLoggedIn={true}&gt;
+                &lt;h1&gt;Dashboard&lt;/h1&gt;
+              &lt;/ProtectedRoute&gt;
+            }
+          /&gt;
+        &lt;/Routes&gt;
+      &lt;/BrowserRouter&gt;
+    );
+  }</code></pre>
+        </div>
+      </section>
+
+      <section class="module" id="module-9">
+        <div class="section-top">
+          <div>
+            <div class="eyebrow">Module 9</div>
+            <h2>Forms &amp; Validation</h2>
+          </div>
+          <a class="back-link" href="#toc">Back to contents</a>
+        </div>
+        <p class="lede">Forms become easier when every input is controlled and validation rules are written clearly.</p>
+        <div class="grid-2">
+          <div class="card">
+            <span class="pill">Key practices</span>
+            <ul class="marker-list">
+              <li>Store form values in state.</li>
+              <li>Update fields with <strong>onChange</strong>.</li>
+              <li>Prevent default form refresh on submit.</li>
+              <li>Show validation feedback next to the related field.</li>
+              <li>Never render raw untrusted HTML into the page.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Validation ideas</span>
+            <ul class="check-list">
+              <li>Required fields</li>
+              <li>Minimum length</li>
+              <li>Email format</li>
+              <li>Password match</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Example code</div>
+          <pre><code>import { useState } from 'react';
+
+  function LoginForm() {
+    const [email, setEmail] = useState('');
+    const [error, setError] = useState('');
+
+    function handleSubmit(event) {
+      event.preventDefault();
+
+      if (!email.includes('@')) {
+        setError('Please enter a valid email address.');
+        return;
+      }
+
+      setError('');
+      console.log('Submit form');
+    }
+
+    return (
+      &lt;form onSubmit={handleSubmit}&gt;
+        &lt;input value={email} onChange={(e) =&gt; setEmail(e.target.value)} /&gt;
+        {error &amp;&amp; &lt;p&gt;{error}&lt;/p&gt;}
+        &lt;button type="submit"&gt;Login&lt;/button&gt;
+      &lt;/form&gt;
+    );
+  }</code></pre>
+        </div>
+      </section>
+
+      <section class="module" id="module-10">
+        <div class="section-top">
+          <div>
+            <div class="eyebrow">Module 10</div>
+            <h2>Redux</h2>
+          </div>
+          <a class="back-link" href="#toc">Back to contents</a>
+        </div>
+        <p class="lede">Redux is most useful when many parts of the app need the same state and local state starts getting messy.</p>
+        <div class="two-col">
+          <div class="card">
+            <span class="pill">Understand this flow</span>
+            <ul class="marker-list">
+              <li>UI dispatches an action.</li>
+              <li>A reducer updates state.</li>
+              <li>The store holds the latest state.</li>
+              <li>Components read values with selectors.</li>
+              <li>Redux Toolkit is the modern default choice.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Use Redux when</span>
+            <ul class="check-list">
+              <li>Many distant components need the same data.</li>
+              <li>App state is too large for simple lifting.</li>
+              <li>You want consistent action-driven updates.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Example code</div>
+          <pre><code>import { createSlice } from '@reduxjs/toolkit';
+
+  const cartSlice = createSlice({
+    name: 'cart',
+    initialState: { items: [] },
+    reducers: {
+      addItem(state, action) {
+        state.items.push(action.payload);
+      }
+    }
+  });
+
+  export const { addItem } = cartSlice.actions;
+  export default cartSlice.reducer;</code></pre>
+        </div>
+        <div class="callout"><strong>Rule of thumb:</strong> learn Context first for small shared state and Redux Toolkit for larger apps.</div>
+      </section>
+
+      <section class="module" id="module-11">
+        <div class="section-top">
+          <div>
+            <div class="eyebrow">Module 11</div>
+            <h2>Authentication</h2>
+          </div>
+          <a class="back-link" href="#toc">Back to contents</a>
+        </div>
+        <p class="lede">Authentication is about identifying the user safely and controlling access to protected areas of the app.</p>
+        <div class="grid-2">
+          <div class="card">
+            <span class="pill">Core concepts</span>
+            <ul class="marker-list">
+              <li>Login, signup, logout, and protected routes.</li>
+              <li>JWT basics and session refresh concepts.</li>
+              <li>HTTP-only cookies are often safer than storing sensitive tokens in localStorage.</li>
+              <li>Auth guards decide whether a route is visible.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Security notes</span>
+            <ul class="check-list">
+              <li>Prefer server-managed auth flows when possible.</li>
+              <li>Avoid exposing sensitive tokens to JavaScript unless you must.</li>
+              <li>Separate auth state from presentational UI.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Example code</div>
+          <pre><code>import { Navigate } from 'react-router-dom';
+
+  function ProtectedRoute({ user, children }) {
+    if (!user) {
+      return &lt;Navigate to="/login" replace /&gt;;
+    }
+
+    return children;
+  }</code></pre>
+        </div>
+      </section>
+
+      <section class="module" id="module-12">
+        <div class="section-top">
+          <div>
+            <div class="eyebrow">Module 12</div>
+            <h2>Testing Introduction</h2>
+          </div>
+          <a class="back-link" href="#toc">Back to contents</a>
+        </div>
+        <p class="lede">Good tests focus on what the user sees and does, not the private implementation details inside a component.</p>
+        <div class="two-col">
+          <div class="card">
+            <span class="pill">Cover these states</span>
+            <ul class="marker-list">
+              <li>Success and failure</li>
+              <li>Loading and empty states</li>
+              <li>Clicks, typing, and submit flows</li>
+              <li>Visible feedback after user actions</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Testing habit</span>
+            <ul class="check-list">
+              <li>Render the component.</li>
+              <li>Perform a user action.</li>
+              <li>Assert what changed on screen.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Example code</div>
+          <pre><code>import { render, screen } from '@testing-library/react';
+  import userEvent from '@testing-library/user-event';
+
+  test('increments the counter', async () =&gt; {
+    render(&lt;Counter /&gt;);
+
+    await userEvent.click(screen.getByRole('button', { name: /like/i }));
+
+    expect(screen.getByText(/likes: 1/i)).toBeInTheDocument();
+  });</code></pre>
+        </div>
+      </section>
+
+      <section class="module" id="module-13">
+        <div class="section-top">
+          <div>
+            <div class="eyebrow">Module 13</div>
+            <h2>Deployment</h2>
+          </div>
+          <a class="back-link" href="#toc">Back to contents</a>
+        </div>
+        <p class="lede">Deployment means packaging your app correctly, checking environment settings, and making sure client-side routes still work after refresh.</p>
+        <div class="grid-2">
+          <div class="card">
+            <span class="pill">Before deploy</span>
+            <ul class="marker-list">
+              <li>Run a production build and fix errors.</li>
+              <li>Confirm base paths and asset paths.</li>
+              <li>Check API URLs and environment variables.</li>
+              <li>Make sure the server falls back to <strong>index.html</strong> for SPA routes.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Final checks</span>
+            <ul class="check-list">
+              <li>App loads after a page refresh.</li>
+              <li>Console has no critical errors.</li>
+              <li>Protected routes still behave correctly.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Example code</div>
+          <pre><code>import { defineConfig } from 'vite';
+  import react from '@vitejs/plugin-react';
+
+  export default defineConfig({
+    plugins: [react()],
+    base: '/portfolio/'
+  });</code></pre>
+        </div>
+      </section>
+
+      <section class="module" id="module-14">
+        <div class="section-top">
+          <div>
+            <div class="eyebrow">Module 14</div>
+            <h2>Advanced Topics</h2>
+          </div>
+          <a class="back-link" href="#toc">Back to contents</a>
+        </div>
+        <p class="lede">These topics become more valuable after the fundamentals feel comfortable. Learn them for leverage, not for memorization.</p>
+        <div class="two-col">
+          <div class="card">
+            <span class="pill">Explore next</span>
+            <ul class="marker-list">
+              <li>Core hooks such as <strong>useEffect</strong>, <strong>useMemo</strong>, <strong>useCallback</strong>, and <strong>useContext</strong>.</li>
+              <li>Custom hooks for reusable stateful logic.</li>
+              <li>Context API for shared app-level values.</li>
+              <li>Webpack and Babel concepts so tooling feels less mysterious.</li>
+              <li>Animations and transitions for UI polish.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Learning advice</span>
+            <ul class="check-list">
+              <li>Do not start with Saga.</li>
+              <li>Use custom hooks when logic repeats.</li>
+              <li>Reach for memoization only when needed.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Example code</div>
+          <pre><code>import { useState } from 'react';
+
+  function useCounter(initialValue = 0) {
+    const [count, setCount] = useState(initialValue);
+
+    function increment() {
+      setCount((current) =&gt; current + 1);
+    }
+
+    return { count, increment };
+  }</code></pre>
+        </div>
+      </section>
+
+      <section class="appendix major" id="appendix-a">
+        <div class="eyebrow">Appendix A</div>
+        <h2>What to Learn First: 6-Week Roadmap</h2>
+        <p class="lede">This keeps the learning order focused so you are building early instead of waiting until everything feels complete.</p>
+        <div class="roadmap-grid">
+          <div class="week-card">
+            <h3>Week 1</h3>
+            <ul class="check-list">
+              <li><a href="#module-1">let and const</a></li>
+              <li><a href="#module-1">arrow functions</a></li>
+              <li><a href="#module-1">imports and exports</a></li>
+              <li><a href="#module-1">spread, rest, and destructuring</a></li>
+              <li><a href="#module-1">array methods</a></li>
+            </ul>
+          </div>
+          <div class="week-card">
+            <h3>Week 2</h3>
+            <ul class="check-list">
+              <li><a href="#module-2">TypeScript basics</a></li>
+              <li><a href="#module-3">React workflow and JSX</a></li>
+              <li><a href="#module-3">props, children, and state</a></li>
+              <li><a href="#module-3">events and dynamic rendering</a></li>
+            </ul>
+          </div>
+          <div class="week-card">
+            <h3>Week 3</h3>
+            <ul class="check-list">
+              <li><a href="#module-6">hooks and effects</a></li>
+              <li><a href="#module-6">refs</a></li>
+              <li><a href="#module-5">styling</a></li>
+              <li><a href="#module-9">forms and validation</a></li>
+            </ul>
+          </div>
+          <div class="week-card">
+            <h3>Week 4</h3>
+            <ul class="check-list">
+              <li><a href="#module-7">fetch and axios</a></li>
+              <li><a href="#module-8">routing and protected routes</a></li>
+              <li><a href="#module-8">404 pages and lazy loading</a></li>
+            </ul>
+          </div>
+          <div class="week-card">
+            <h3>Week 5</h3>
+            <ul class="check-list">
+              <li><a href="#module-14">Context API</a></li>
+              <li><a href="#module-10">Redux Toolkit basics</a></li>
+              <li><a href="#module-12">testing basics</a></li>
+              <li><a href="#module-13">deployment basics</a></li>
+            </ul>
+          </div>
+          <div class="week-card">
+            <h3>Week 6 and Beyond</h3>
+            <ul class="check-list">
+              <li><a href="#module-14">memoization patterns</a></li>
+              <li><a href="#module-4">advanced debugging</a></li>
+              <li><a href="#module-11">authentication patterns</a></li>
+              <li><a href="#module-14">animations, webpack, and Babel</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="appendix" id="appendix-b">
+        <div class="eyebrow">Appendix B</div>
+        <h2>Best Beginner Projects</h2>
+        <p class="lede">Each project below teaches a specific cluster of skills, so use them as checkpoints rather than random app ideas.</p>
+        <div class="project-grid">
+          <div class="project-card">
+            <h3>Counter App</h3>
+            <p class="small">Learn state, events, and rendering values.</p>
+            <ul class="marker-list">
+              <li>Increment and decrement buttons</li>
+              <li>Disable the minus button at zero</li>
+            </ul>
+          </div>
+          <div class="project-card">
+            <h3>Todo App</h3>
+            <p class="small">Learn lists, keys, local state, and form handling.</p>
+            <ul class="marker-list">
+              <li>Add, toggle, and delete tasks</li>
+              <li>Filter by completed status</li>
+            </ul>
+          </div>
+          <div class="project-card">
+            <h3>Notes App</h3>
+            <p class="small">Learn CRUD operations and structured component state.</p>
+            <ul class="marker-list">
+              <li>Create and edit notes</li>
+              <li>Store note data in arrays of objects</li>
+            </ul>
+          </div>
+          <div class="project-card">
+            <h3>Weather App</h3>
+            <p class="small">Learn API fetching, loading states, and error handling.</p>
+            <ul class="marker-list">
+              <li>Search by city</li>
+              <li>Show loading, success, and error states</li>
+            </ul>
+          </div>
+          <div class="project-card">
+            <h3>Expense Tracker</h3>
+            <p class="small">Learn derived values, filters, and reusable form components.</p>
+            <ul class="marker-list">
+              <li>Add categories and totals</li>
+              <li>Filter by date or category</li>
+            </ul>
+          </div>
+          <div class="project-card">
+            <h3>Blog App / Auth Dashboard</h3>
+            <p class="small">Learn routing, API data, protected pages, and shared state.</p>
+            <ul class="marker-list">
+              <li>Route to a dynamic detail page</li>
+              <li>Protect a dashboard route after login</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="appendix" id="appendix-c">
+        <div class="eyebrow">Appendix C</div>
+        <h2>Common Mistakes Beginners Make</h2>
+        <p class="lede">These mistakes are normal. The goal is to notice them earlier and build the habit of correcting them quickly.</p>
+        <div class="grid-2">
+          <div class="card">
+            <ul class="marker-list">
+              <li>Mutating state directly</li>
+              <li>Forgetting keys when rendering lists</li>
+              <li>Using <strong>useEffect</strong> incorrectly and causing loops</li>
+              <li>Keeping too much state instead of deriving values</li>
+              <li>Using advanced libraries before mastering basics</li>
+              <li>Memorizing syntax without building projects</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Fix pattern</span>
+            <ul class="check-list">
+              <li>Replace state instead of mutating it.</li>
+              <li>Give every rendered list item a stable key.</li>
+              <li>Practice tiny projects after each module.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Wrong vs right</div>
+          <pre><code>// Wrong
+  user.name = 'New name';
+  setUser(user);
+
+  // Right
+  setUser((current) =&gt; ({
+    ...current,
+    name: 'New name'
+  }));</code></pre>
+        </div>
+      </section>
+
+      <section class="appendix" id="appendix-d">
+        <div class="eyebrow">Appendix D</div>
+        <h2>Final Advice</h2>
+        <p class="lede">You do not need to master everything before building. The fastest path is learning one concept, building one small example, and repeating.</p>
+        <div class="grid-2">
+          <div class="card">
+            <span class="pill">Highest-value path</span>
+            <ul class="marker-list">
+              <li>JavaScript fundamentals</li>
+              <li>React basics</li>
+              <li>Hooks</li>
+              <li>Forms</li>
+              <li>API calls</li>
+              <li>Routing</li>
+              <li>Context or Redux Toolkit</li>
+              <li>Testing and deployment</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Learning loop</span>
+            <ul class="check-list">
+              <li>Learn one concept.</li>
+              <li>Build one tiny example.</li>
+              <li>Break it and debug it.</li>
+              <li>Repeat with the next concept.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout success"><strong>Keep perspective:</strong> legacy topics like class components, HOCs, Radium, and Saga are worth recognizing, but they should not slow down
+   your modern React learning path.</div>
+        <p class="footer-note">Prepared as a cleaner, example-rich edition of the original study guide.</p>
+      </section>
+    </main>
+  </body>
+  </html>
