@@ -59,10 +59,6 @@ The guide follows a practical approach:
 * Understanding modern React practices
 * Learning by building projects
 
-## 📄 File Included
-
-`javascript-react-study-guide-professional.pdf`
-
 ## 🤝 Contribution
 
 Feel free to fork this repository, improve the guide, and contribute additional examples or projects.
