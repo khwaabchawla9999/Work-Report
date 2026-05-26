@@ -32,30 +32,6 @@ A responsive Spotify-inspired landing page built using HTML and CSS.
 
 A professional beginner-to-intermediate JavaScript and React study guide covering modern frontend development concepts.
 
-#### Topics Covered
-
-* JavaScript Fundamentals
-* TypeScript Basics
-* React Basics & Hooks
-* Routing & API Handling
-* Forms & Validation
-* Redux Toolkit
-* Authentication
-* Deployment
-* Advanced React Concepts
-
-#### Included Files
-
-* Interactive HTML Study Guide
-* Professional PDF Version
-
-📄 PDF Guide:
-[JavaScript & React Study Guide](./Javascript+React%20Basics/javascript-react-study-guide-professional.pdf)
-
-🌐 HTML Version:
-[Open HTML Guide](./Javascript+React%20Basics/index%28js%20and%20react%29.html)
-
----
 
 ## GitHub Pages
 
